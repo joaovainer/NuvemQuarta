@@ -5,8 +5,15 @@ from pathlib import Path
 
 class Settings:
     app_name = "Mural de Ideias Distribuido"
-    database_url = getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mural")
-    redis_url = getenv("REDIS_URL", "redis://localhost:6379/0")
+    database_url = getenv(
+    "DATABASE_URL",
+    "postgresql://postgre_sfaq_user:X6FCY1Cqs73RpjCtqMr6CW5Ynq7TB63V@dpg-d8kv9njeo5us73atpk8g-a.oregon-postgres.render.com/postgre_sfaq"
+    )
+
+    redis_url = getenv(
+        "REDIS_URL",
+        "redis://red-d8kvabm7r5hc739f6dt0:6379"
+    )
     cache_ttl_seconds = int(getenv("CACHE_TTL_SECONDS", "10"))
     frontend_dir = Path(getenv("FRONTEND_DIR", "frontend")).resolve()
 
