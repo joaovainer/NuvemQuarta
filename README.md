@@ -68,6 +68,8 @@ Se o comando `wsl --update --web-download` falhar, atualize o WSL pela Microsoft
 
 A nuvem escolhida foi a **Render**, porque ela permite subir web services, PostgreSQL e Key Value/Redis por Blueprint, mantendo a infraestrutura declarada no arquivo `render.yaml`.
 
+### Opcao recomendada: Blueprint
+
 Passos:
 
 1. Crie um repositorio no GitHub e envie estes arquivos.
@@ -85,6 +87,26 @@ Depois do deploy, use este formato na entrega:
 PPT: docs/apresentacao_mural_distribuido.pptx
 Link do sistema: https://URL-GERADA-PELA-RENDER
 ```
+
+### Se voce criar um Web Service manual
+
+Se voce criou **New > Web Service** em vez de **New > Blueprint**, a Render procura um `Dockerfile` na raiz do repositorio. Este projeto ja tem esse arquivo para permitir o deploy manual.
+
+Configure o Web Service assim:
+
+- Runtime: `Docker`
+- Dockerfile Path: `Dockerfile`
+- Branch: `main`
+- Health Check Path: `/api/health`
+
+Para o sistema completo funcionar na Render, o servico tambem precisa das variaveis:
+
+- `DATABASE_URL`: URL do PostgreSQL criado na Render
+- `REDIS_URL`: URL do Key Value/Redis criado na Render
+- `CORS_ORIGINS`: `*`
+- `CACHE_TTL_SECONDS`: `10`
+
+Se voce usar o Blueprint, essas variaveis sao criadas automaticamente.
 
 ## Roteiro curto para apresentar
 
