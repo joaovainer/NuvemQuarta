@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mural de Ideias Distribuido</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Sistemas Distribuidos</p>
+          <h1>Mural de Ideias Distribuido</h1>
+          <p class="lead">
+            Cadastre uma ideia, envie para uma fila Redis e veja um worker separado processar tudo em segundo plano.
+          </p>
+        </div>
+        <div class="architecture-card">
+          <span>Navegador</span>
+          <strong>API REST</strong>
+          <span>PostgreSQL + Redis</span>
+          <strong>Worker</strong>
+        </div>
+      </section>
+
+      <section class="grid">
+        <form id="idea-form" class="panel form-panel">
+          <div class="panel-title">
+            <p class="eyebrow">Nova entrada</p>
+            <h2>Enviar ideia</h2>
+          </div>
+          <label>
+            Integrante
+            <input id="author" name="author" minlength="2" maxlength="60" required placeholder="Seu nome" />
+          </label>
+          <label>
+            Titulo
+            <input id="title" name="title" minlength="3" maxlength="90" required placeholder="Ex: Fila inteligente" />
+          </label>
+          <label>
+            Descricao
+            <textarea
+              id="description"
+              name="description"
+              minlength="10"
+              maxlength="600"
+              required
+              placeholder="Explique rapidamente a ideia..."
+            ></textarea>
+          </label>
+          <button type="submit">Enviar para a fila</button>
+          <button type="button" id="demo-button" class="ghost">Criar dados demo</button>
+          <p id="form-message" class="message"></p>
+        </form>
+
+        <aside class="panel status-panel">
+          <div class="panel-title">
+            <p class="eyebrow">Operacao</p>
+            <h2>Status distribuido</h2>
+          </div>
+          <dl class="metrics">
+            <div>
+              <dt>Banco</dt>
+              <dd id="database-status">...</dd>
+            </div>
+            <div>
+              <dt>Redis</dt>
+              <dd id="redis-status">...</dd>
+            </div>
+            <div>
+              <dt>Fila</dt>
+              <dd id="queue-size">0</dd>
+            </div>
+            <div>
+              <dt>Worker</dt>
+              <dd id="worker-status">...</dd>
+            </div>
+          </dl>
+          <p class="hint">
+            A API salva rapido; o worker processa depois. Esse desacoplamento e o ponto central da arquitetura.
+          </p>
+        </aside>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title row-title">
+          <div>
+            <p class="eyebrow">Resultado</p>
+            <h2>Ideias processadas</h2>
+          </div>
+          <button id="refresh-button" class="small">Atualizar</button>
+        </div>
+        <div id="ideas-list" class="ideas-list"></div>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
